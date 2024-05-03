@@ -22,7 +22,7 @@
 |<img src='.github/img/ytpro3.png'  > | <img src='.github/img/ytpro2.png'  > |
 
 
-## Download YT PRO
+## Download YT PREMIUM
 
 [![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-ff0000?style=for-the-badge&logo=download&logoColor=white "Download Apk")](https://nightly.link/prateek-chaubey/YTPro/workflows/gradle/main/Apk.zip)
 
