@@ -24,7 +24,7 @@
 
 ## Download YT PREMIUM
 
-[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-ff0000?style=for-the-badge&logo=download&logoColor=white "Download Apk")](https://nightly.link/atanuroy22/YTPro/workflows/gradle/main/Apk.zip)
+[![Download zip]([(https://github.com/atanuroy22/YTPro/releases/download/Yt-pro-v1/YTPRO_fixed.apk))](https://nightly.link/atanuroy22/YTPro/workflows/gradle/main/Apk.zip)
 
 ## Features
  * Video Downloader
