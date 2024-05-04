@@ -1,7 +1,7 @@
-/*****YTPRO*******
-Author: Prateek Chaubey
+/*****YT Premium*******
+Author: Atanu Roy
 Version: 3.1
-URI: https://github.com/prateek-chaubey/
+URI: https://github.com/atanuroy22/
 */
 
 
@@ -452,15 +452,15 @@ ytpSetI.innerHTML+=`<b style='font-size:18px' >YT PRO Settings</b>
 <br>
 <div>Force Zoom <span onclick="sttCnf(this,'fzoom');" style="${sttCnf(0,0,"fzoom")}" ><b style="${sttCnf(0,1,"fzoom")}" ></b></span></div> 
 <br>
-<div style="display:flex;justify-content:center;font-family:cursive;text-align:center;font-size:22px;font-weight:bolder;color:#0f8;">Made with 
+<div style="display:flex;justify-content:center;font-family:cursive;text-align:center;font-size:22px;font-weight:bolder;color:#0f8;">Made with
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#f00" style="margin:6px;margin-top:5px" viewBox="0 0 16 16">
 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-</svg> by Prateek Chaubey</div>
+</svg> by Atanu Roy</div>
 <br><br>
-<div style="font-size:13px;"><b style="font-weight:bold">Disclaimer</b>: This is an unofficial OSS Youtube Mod , all the logos and brands are property of Google LLC.<br>
-You can get the source code at <a href="#" onclick="Android.oplink('https://github.com/prateek-chaubey/YTPRO')" > https://github.com/prateek-chaubey/YTPRO</a>
+<div style="font-size:13px;"><b style="font-weight:bold">Disclaimer</b>: This is Youtube Premium, issue fixed by Atanu Roy.<br>
+You can get the source code at <a href="#" onclick="Android.oplink('https://github.com/atanuroy22/YTPRO')" > https://github.com/atanuroy22/YTPRO</a>
 <br><br><center>
-<a href="#" onclick="Android.oplink('https://github.com/prateek-chaubey/YTPRO/issues')" >Report Bugs</a>
+<a href="#" onclick="Android.oplink('https://github.com/atanuroy22/YTPRO/issues')" >Report Bugs</a>
 </center></div>`;
 
 document.body.appendChild(ytpSet);
