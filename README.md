@@ -22,10 +22,10 @@
 |<img src='.github/img/ytpro3.png'  > | <img src='.github/img/ytpro2.png'  > |
 
 
-## Download YT PREMIUM
+## Download YT PREMIUM❤️
 
-[![Download zip]([(https://github.com/atanuroy22/YTPro/releases/download/Yt-pro-v1/YTPRO_fixed.apk))](https://nightly.link/atanuroy22/YTPro/workflows/gradle/main/Apk.zip)
-
+[![Download YT premium lite]([(https://github.com/atanuroy22/YTPro/releases/download/Yt-pro-v1/YTPRO_fixed.apk))]()
+❤️⚡⚡❤️
 ## Features
  * Video Downloader
  * Shorts Downloader 
