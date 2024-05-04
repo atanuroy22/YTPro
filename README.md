@@ -6,7 +6,7 @@
 <div align="center">
 
 
-[![Gradle](https://github.com/prateek-chaubey/YTPro/actions/workflows/gradle.yml/badge.svg)](https://github.com/prateek-chaubey/YTPro/actions/workflows/gradle.yml)
+[![Gradle](https://github.com/prateek-chaubey/YTPro/actions/workflows/gradle.yml/badge.svg)](https://github.com/atanuroy22/YTPro/actions/workflows/gradle.yml)
 <img alt="jsDelivr monthly hits badge" src="https://data.jsdelivr.com/v1/package/npm/ytpro/badge">
 
 [![https://telegram.me/th30neand0nly0ne](https://img.shields.io/badge/Telegram-Channel-orange.svg?style=flat-square)](https://telegram.me/th30neand0nly0ne)
@@ -24,7 +24,7 @@
 
 ## Download YT PREMIUM
 
-[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-ff0000?style=for-the-badge&logo=download&logoColor=white "Download Apk")](https://nightly.link/prateek-chaubey/YTPro/workflows/gradle/main/Apk.zip)
+[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-ff0000?style=for-the-badge&logo=download&logoColor=white "Download Apk")](https://nightly.link/atanuroy22/YTPro/workflows/gradle/main/Apk.zip)
 
 ## Features
  * Video Downloader
@@ -52,9 +52,9 @@
 * [node-ytdl](https://github.com/fent/node-ytdl) , [Sponsor Block](https://github.com/ajayyy/SponsorBlock) , [return-youtube-dislike](https://github.com/Anarios/return-youtube-dislike) , [ytdl](https://github.com/prateek-chaubey/ytdl)
 
 ### ❤️Supporters❤️
-[![Stargazers repo roster for @prateek-chaubey/YTPro](http://reporoster.com/stars/dark/prateek-chaubey/YTPro)](https://github.com/prateek-chaubey/YTPro/stargazers)
+[![Stargazers repo roster for @prateek-chaubey/YTPro](http://reporoster.com/stars/dark/prateek-chaubey/YTPro)](https://github.com/atanuroy22/YTPro/stargazers)
      
-[![Forkers repo roster for @prateek-chaubey/YTPro](http://reporoster.com/forks/dark/prateek-chaubey/YTPro)](https://github.com/prateek-chaubey/YTPro/network/members)
+[![Forkers repo roster for @prateek-chaubey/YTPro](http://reporoster.com/forks/dark/prateek-chaubey/YTPro)](https://github.com/atanuroy22/YTPro/network/members)
 
 
 ## Disclaimer 
