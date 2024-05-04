@@ -24,7 +24,7 @@
 
 ## Download YT PREMIUM❤️
 
-[(<href='https://github.com/atanuroy22/YTPro/releases/download/Yt-pro-v1/YTPRO_fixed.apk'>)]
+[(Download ='https://github.com/atanuroy22/YTPro/releases/download/Yt-pro-v1/YTPRO_fixed.apk')]
 ❤️⚡⚡❤️
 ## Features
  * Video Downloader
