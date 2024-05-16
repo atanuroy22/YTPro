@@ -2,30 +2,14 @@
 <img src='.github/img/ytp.gif'  >
 </p>
 <h1 align=center>YOUTUBE PREMIUM LITE</h1>
-
-<div align="center">
-
-
-[![Gradle](https://github.com/prateek-chaubey/YTPro/actions/workflows/gradle.yml/badge.svg)](https://github.com/atanuroy22/YTPro/actions/workflows/gradle.yml)
-<img alt="jsDelivr monthly hits badge" src="https://data.jsdelivr.com/v1/package/npm/ytpro/badge">
-
-[![https://telegram.me/th30neand0nly0ne](https://img.shields.io/badge/Telegram-Channel-orange.svg?style=flat-square)](https://telegram.me/th30neand0nly0ne)
-[![https://telegram.me/th30neand0nly](https://img.shields.io/badge/Telegram-@th30neand0nly-blue.svg?style=flat-square)](https://telegram.me/th30neand0nly)
-
-</div>
-
----
-
-
-| | |
-|:--:|:--:| 
-|<img src='.github/img/ytpro3.png'  > | <img src='.github/img/ytpro2.png'  > |
-
-
 ## Download YT PREMIUM❤️
 
-[(Download ='https://github.com/atanuroy22/YTPro/releases/download/Youtube_premium_Lite-v2/YT.Premium.Lite.v2.apk')]
+# Download ='https://github.com/atanuroy22/YTPro/releases/download/Youtube_premium_Lite-v2/YT.Premium.Lite.v2.apk'
 ❤️⚡⚡❤️
+
+
+
+
 ## Features
  * Video Downloader
  * Shorts Downloader 
@@ -48,6 +32,25 @@
 ## ToDo
  * Improve Background Player
 
+
+
+<div align="center">
+
+
+[![Gradle](https://github.com/prateek-chaubey/YTPro/actions/workflows/gradle.yml/badge.svg)](https://github.com/atanuroy22/YTPro/actions/workflows/gradle.yml)
+<img alt="jsDelivr monthly hits badge" src="https://data.jsdelivr.com/v1/package/npm/ytpro/badge">
+
+[![https://telegram.me/th30neand0nly0ne](https://img.shields.io/badge/Telegram-Channel-orange.svg?style=flat-square)](https://telegram.me/th30neand0nly0ne)
+[![https://telegram.me/th30neand0nly](https://img.shields.io/badge/Telegram-@th30neand0nly-blue.svg?style=flat-square)](https://telegram.me/th30neand0nly)
+
+</div>
+
+---
+
+
+| | |
+|:--:|:--:| 
+|<img src='.github/img/ytpro3.png'  > | <img src='.github/img/ytpro2.png'  > |
 ### Credits
 * [node-ytdl](https://github.com/fent/node-ytdl) , [Sponsor Block](https://github.com/ajayyy/SponsorBlock) , [return-youtube-dislike](https://github.com/Anarios/return-youtube-dislike) , [ytdl](https://github.com/prateek-chaubey/ytdl)
 
