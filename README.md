@@ -2,10 +2,8 @@
 <img src='.github/img/ytp.gif'  >
 </p>
 <h1 align=center>YOUTUBE PREMIUM LITE</h1>
-## Download YT PREMIUM❤️
+# ❤️⚡[Download](https://github.com/atanuroy22/YTPro/releases/download/Youtube_premium_Lite-v2/YT.Premium.Lite.v2.apk)⚡❤️
 
-# Download ='https://github.com/atanuroy22/YTPro/releases/download/Youtube_premium_Lite-v2/YT.Premium.Lite.v2.apk'
-❤️⚡⚡❤️
 
 
 
