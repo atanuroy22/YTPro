@@ -2,7 +2,7 @@
 <p align="center">
 <img src='.github/img/ytp.gif'  >
 </p>
-<h1 align=center>YT PRO </h1>
+<h1 align=center>YT PREMIUM LITE </h1>
 
 <div align="center">
 
