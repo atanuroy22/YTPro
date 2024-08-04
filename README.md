@@ -23,7 +23,7 @@
 |<img src='.github/img/01103.png'  > | <img src='.github/img/01102.png'  > |<img src='.github/img/01101.png'  > |
 
 ## Download YT PRO
-
+[![Download apk](https://github.com/atanuroy22/YTPro/releases/download/Youtube_premium_Lite-v3/YT.Premium.Lite.v3.Api.1.apk)]
 [![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-ff0000?style=for-the-badge&logo=download&logoColor=white "Download Apk")](https://nightly.link/prateek-chaubey/YTPro/workflows/gradle/main/Apk.zip)
 
 ## Features
