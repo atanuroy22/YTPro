@@ -1,6 +1,6 @@
 /*****YTPRO*******
 Author: Prateek Chaubey
-Version: 3.4.57
+Version: 3.4.65
 URI: https://github.com/prateek-chaubey/
 */
 
@@ -67,7 +67,7 @@ const n = components.searchParams.get('n');
 var nc=eval(ytproNCode[0]+ytproNCode[1]+"('"+n+"');");
 components.searchParams.set('n',nc);
 if(p == "sig"){
-return  components.toString()+"&sig="+sig;
+return components.toString()+"&sig="+sig;
 }
 else{
 return components.toString();
@@ -79,8 +79,12 @@ return components.toString();
 /*Dark and Light Mode*/
 var c="#000";
 var d="#f2f2f2";
+var isD=false;
 var dislikes="...";
 
+
+//Force Dark mode 
+/*
 if(document.cookie.indexOf("PREF") < 0 || document.cookie.indexOf("f6=") < 0){
 document.cookie.replace(
 /(?<=^|;).+?(?=\=|;|$)/g,
@@ -91,11 +95,13 @@ name => location.hostname
 );
 document.cookie="PREF=f6=400&f7=100;";
 window.location.href=window.location.href;
-}
+}*/
 if(document.cookie.indexOf("f6=400") > -1){
 c ="#fff";d="rgba(255,255,255,0.1)";
+isD=true;
 }else{
-c="#000";d="rgba(0,0,0,0.1)";
+c="#000";d="rgba(0,0,0,0.05)";
+isD=false;
 }
 var downBtn=`<svg xmlns="http://www.w3.org/2000/svg" height="18" fill="${c}" viewBox="0 0 24 24" width="18" focusable="false"><path d="M17 18v1H6v-1h11zm-.5-6.6-.7-.7-3.8 3.7V4h-1v10.4l-3.8-3.8-.7.7 5 5 5-4.9z"></path></svg>`;
 
@@ -105,9 +111,9 @@ var downBtn=`<svg xmlns="http://www.w3.org/2000/svg" height="18" fill="${c}" vie
 var extractFunctions = (body)=> {
 
 /*Regex & Functions for Decipher & NCode*/
-// NewPipeExtractor regexps
+
 const DECIPHER_NAME_REGEXPS = [
-  '\\bm=([a-zA-Z0-9$]{2,})\\(decodeURIComponent\\(h\\.s\\)\\);',
+  '\\bm=([a-zA-Z0-9$]{2,})\\(decodeURIComponent\\(h\\.s\\)\\)',
   '\\bc&&\\(c=([a-zA-Z0-9$]{2,})\\(decodeURIComponent\\(c\\)\\)',
   // eslint-disable-next-line max-len
   '(?:\\b|[^a-zA-Z0-9$])([a-zA-Z0-9$]{2,})\\s*=\\s*function\\(\\s*a\\s*\\)\\s*\\{\\s*a\\s*=\\s*a\\.split\\(\\s*""\\s*\\)',
@@ -138,6 +144,36 @@ const HELPER_REGEXP = `var (${VARIABLE_PART})=\\{((?:(?:${
   VARIABLE_PART_DEFINE}${SPLICE_PART}|${
   VARIABLE_PART_DEFINE}${SWAP_PART}),?\\n?)+)\\};`;
 
+const SCVR = '[a-zA-Z0-9$_]';
+const FNR = `${SCVR}+`;
+const AAR = '\\[(\\d+)]';
+const N_TRANSFORM_NAME_REGEXPS = [
+  // NewPipeExtractor regexps
+  `${SCVR}+="nn"\\[\\+${
+    SCVR}+\\.${SCVR}+],${
+    SCVR}+=${SCVR
+  }+\\.get\\(${SCVR}+\\)\\)&&\\(${
+    SCVR}+=(${SCVR
+  }+)\\[(\\d+)]`,
+  `${SCVR}+="nn"\\[\\+${
+    SCVR}+\\.${SCVR}+],${
+    SCVR}+=${SCVR}+\\.get\\(${
+    SCVR}+\\)\\).+\\|\\|(${SCVR
+  }+)\\(""\\)`,
+  `\\(${SCVR}=String\\.fromCharCode\\(110\\),${
+    SCVR}=${SCVR}\\.get\\(${
+    SCVR}\\)\\)&&\\(${SCVR
+  }=(${FNR})(?:${AAR})?\\(${
+    SCVR}\\)`,
+  `\\.get\\("n"\\)\\)&&\\(${SCVR
+  }=(${FNR})(?:${AAR})?\\(${
+    SCVR}\\)`,
+  // Skick regexps
+  '(\\w+).length\\|\\|\\w+\\(""\\)',
+  '\\w+.length\\|\\|(\\w+)\\(""\\)',
+];
+
+// LavaPlayer regexps
 const N_TRANSFORM_REGEXP = 'function\\(\\s*(\\w+)\\s*\\)\\s*\\{' +
   'var\\s*(\\w+)=(?:\\1\\.split\\(""\\)|String\\.prototype\\.split\\.call\\(\\1,""\\)),' +
   '\\s*(\\w+)=(\\[.*?]);\\s*\\3\\[\\d+]' +
@@ -158,14 +194,16 @@ const matchFirst = (regex, str) => matchRegex(regex, str)[0];
 
 const matchGroup1 = (regex, str) => matchRegex(regex, str)[1];
 
+
 const getFuncName = (body, regexps) => {
 let fn;
 for (const regex of regexps) {
 try {
 fn = matchGroup1(regex, body);
-const idx = fn.indexOf('[0]');
-if (idx > -1) {
-fn = matchGroup1(`${fn.substring(idx, 0).replace(/\$/g, '\\$')}=\\[([a-zA-Z0-9$\\[\\]]{2,})\\]`, body);
+try {
+fn = matchGroup1(`${fn.replace(/\$/g, '\\$')}=\\[([a-zA-Z0-9$\\[\\]]{2,})\\]`, body);
+} catch (err) {
+// Function name is not inside an array
 }
 break;
 } catch (err) {
@@ -259,9 +297,25 @@ return null;
 
 
 
+const extractNTransformWithName = body => {
+try {
+const nFuncName = getFuncName(body, N_TRANSFORM_NAME_REGEXPS);
+const funcPattern = `(${
+nFuncName.replace(/\$/g, '\\$')
+// eslint-disable-next-line max-len
+}=\\s*function([\\S\\s]*?\\}\\s*return (([\\w$]+?\\.join\\(""\\))|(Array\\.prototype\\.join\\.call\\([\\w$]+?,[\\n\\s]*(("")|(\\("",""\\)))\\)))\\s*\\}))`;
+const nTransformFunc = `var ${matchGroup1(funcPattern, body)};`;
+const callerFunc = `${nFuncName}`;
+return [nTransformFunc , callerFunc];
+} catch (e) {
+return null;
+}
+};
+
+
 
 const extractNTransform = body => {
-const nTransformFunc = getExtractFunctions([extractNTransformFunc], body);
+const nTransformFunc = getExtractFunctions([extractNTransformFunc,extractNTransformWithName], body);
 if (!nTransformFunc) {
 console.warn('WARNING: Could not parse nTransform function.\n');
 }
@@ -293,7 +347,7 @@ text-align:center;line-height:35px;
 `);
 setDiv.setAttribute("id","setDiv");
 var svg=document.createElement("div");
-svg.innerHTML=`<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 22 22" width="22"  id="hSett"><path d="M12 9.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5m0-1c-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5 3.5-1.57 3.5-3.5-1.57-3.5-3.5-3.5zM13.22 3l.55 2.2.13.51.5.18c.61.23 1.19.56 1.72.98l.4.32.5-.14 2.17-.62 1.22 2.11-1.63 1.59-.37.36.08.51c.05.32.08.64.08.98s-.03.66-.08.98l-.08.51.37.36 1.63 1.59-1.22 2.11-2.17-.62-.5-.14-.4.32c-.53.43-1.11.76-1.72.98l-.5.18-.13.51-.55 2.24h-2.44l-.55-2.2-.13-.51-.5-.18c-.6-.23-1.18-.56-1.72-.99l-.4-.32-.5.14-2.17.62-1.21-2.12 1.63-1.59.37-.36-.08-.51c-.05-.32-.08-.65-.08-.98s.03-.66.08-.98l.08-.51-.37-.36L3.6 8.56l1.22-2.11 2.17.62.5.14.4-.32c.53-.44 1.11-.77 1.72-.99l.5-.18.13-.51.54-2.21h2.44M14 2h-4l-.74 2.96c-.73.27-1.4.66-2 1.14l-2.92-.83-2 3.46 2.19 2.13c-.06.37-.09.75-.09 1.14s.03.77.09 1.14l-2.19 2.13 2 3.46 2.92-.83c.6.48 1.27.87 2 1.14L10 22h4l.74-2.96c.73-.27 1.4-.66 2-1.14l2.92.83 2-3.46-2.19-2.13c.06-.37.09-.75.09-1.14s-.03-.77-.09-1.14l2.19-2.13-2-3.46-2.92.83c-.6-.48-1.27-.87-2-1.14L14 2z"></path></svg>
+svg.innerHTML=`<svg fill="${ window.location.href.indexOf("watch") < 0 ? c : "#fff" }" xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 22 22" width="22"  id="hSett"><path d="M12 9.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5m0-1c-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5 3.5-1.57 3.5-3.5-1.57-3.5-3.5-3.5zM13.22 3l.55 2.2.13.51.5.18c.61.23 1.19.56 1.72.98l.4.32.5-.14 2.17-.62 1.22 2.11-1.63 1.59-.37.36.08.51c.05.32.08.64.08.98s-.03.66-.08.98l-.08.51.37.36 1.63 1.59-1.22 2.11-2.17-.62-.5-.14-.4.32c-.53.43-1.11.76-1.72.98l-.5.18-.13.51-.55 2.24h-2.44l-.55-2.2-.13-.51-.5-.18c-.6-.23-1.18-.56-1.72-.99l-.4-.32-.5.14-2.17.62-1.21-2.12 1.63-1.59.37-.36-.08-.51c-.05-.32-.08-.65-.08-.98s.03-.66.08-.98l.08-.51-.37-.36L3.6 8.56l1.22-2.11 2.17.62.5.14.4-.32c.53-.44 1.11-.77 1.72-.99l.5-.18.13-.51.54-2.21h2.44M14 2h-4l-.74 2.96c-.73.27-1.4.66-2 1.14l-2.92-.83-2 3.46 2.19 2.13c-.06.37-.09.75-.09 1.14s.03.77.09 1.14l-2.19 2.13 2 3.46 2.92-.83c.6.48 1.27.87 2 1.14L10 22h4l.74-2.96c.73-.27 1.4-.66 2-1.14l2.92.83 2-3.46-2.19-2.13c.06-.37.09-.75.09-1.14s-.03-.77-.09-1.14l2.19-2.13-2-3.46-2.92.83c-.6-.48-1.27-.87-2-1.14L14 2z"></path></svg>
 `;
 setDiv.appendChild(svg);
 insertAfter(document.getElementsByTagName("ytm-home-logo")[0],setDiv);
@@ -315,7 +369,8 @@ window.location.hash="settings";
 var scripts = document.getElementsByTagName('script');
 for(var i=0;i<scripts.length;i++){
 if(scripts[i].src.indexOf("/base.js") > 0){
-fetch(scripts[i].src).then((res) => res.text()).then((r) => extractFunctions(r));
+var sUrl="https://www.youtube.com/s/player/"+scripts[i].src.match(`(?<=player\/).*(?=\/player)`)+"/player_ias.vflset/en_US/base.js";
+fetch(sUrl).then((res) => res.text()).then((r) => extractFunctions(r));
 }
 }
 
@@ -358,21 +413,22 @@ compactDisplay: "short",
 /*Skips the bad part :)*/
 function skipSponsor(){
 var sDiv=document.createElement("div");
-sDiv.setAttribute("style",`height:3px;pointer-events:none;width:100%;background:transparent;position:fixed;z-index:99999999;`)
+sDiv.setAttribute("style",`height:3px;pointer-events:none;width:100%;position:absolute;z-index:99;`)
 sDiv.setAttribute("id","sDiv");
 var dur=document.getElementsByClassName('video-stream')[0].duration;
 
 for(var x in sTime){
 var s1=document.createElement("div");
 var s2=sTime[x];
-s1.setAttribute("style",`height:3px;width:${(100/dur) * (s2[1]-s2[0])}%;background:#0f8;position:fixed;z-index:99999999;left:${(100/dur) * s2[0]}%;`)
+s1.setAttribute("style",`height:3px;width:${(100/dur) * (s2[1]-s2[0])}%;background:#0f8;position:absolute;z-index:9;left:${(100/dur) * s2[0]}%;`)
 sDiv.appendChild(s1);
 }
+
 if(document.getElementById("sDiv") == null){
-if(document.getElementsByClassName('YtmChapteredProgressBarHost')[0] != null){
-document.getElementsByClassName('YtmChapteredProgressBarHost')[0].appendChild(sDiv);
+if(document.getElementsByClassName('YtChapteredProgressBarHost')[0] != null){
+document.getElementsByClassName('YtChapteredProgressBarHost')[0].appendChild(sDiv);
 }else{
-try{document.getElementsByClassName('YtmProgressBarProgressBarLine')[0].appendChild(sDiv);}catch{}
+try{document.getElementsByClassName('YtProgressBarLineProgressBarLine')[0].appendChild(sDiv);}catch{}
 }
 }
 }
@@ -424,6 +480,7 @@ sTime.push(time);
 
 /*Skip the Sponsor*/
 document.getElementsByClassName('video-stream')[0].ontimeupdate=()=>{
+skipSponsor();
 var cur=document.getElementsByClassName('video-stream')[0].currentTime;
 for(var x in sTime){
 var s2=sTime[x];
@@ -437,7 +494,7 @@ addSkipper(s2[0]);
 };
 
 
-setInterval(skipSponsor,50);
+
 
 
 }
@@ -536,13 +593,13 @@ history.back();
 });
 
 ytpSetI.setAttribute("style",`
-height:65%;width:85%;overflow:auto;background:#0f0f0f;
+height:65%;width:85%;overflow:auto;background:${isD ? "#212121" : "#f1f1f1"};
 position:absolute;bottom:20px;
-z-index:99999999999999;padding:20px;text-align:center;border-radius:25px;color:white;text-align:center;
+z-index:99999999999999;padding:20px;text-align:center;border-radius:25px;color:${c};text-align:center;
 `);
 
 ytpSetI.innerHTML=`<style>
-#settingsprodiv a{text-decoration:underline;color:white;} #settingsprodiv li{list-style:none; display:flex;align-items:center;justify-content:center;color:#fff;border-radius:25px;padding:10px;background:#000;margin:5px;}
+#settingsprodiv a{text-decoration:underline;} #settingsprodiv li{list-style:none; display:flex;align-items:center;justify-content:center;color:#fff;border-radius:25px;padding:10px;background:#000;margin:5px;}
 #ssprodivI div{
 height:10px;
 width:calc(100% - 20px);
@@ -554,27 +611,27 @@ display:block;
 }
 #ssprodivI div span{
 display:block;
-height:15px;
-width:30px;
-border-radius:20px;
+height:23px;
+width:40px;
+border-radius:40px;
 float:right;
 position:relative;
-background:rgba(255,0,0,.5);
+background:#151515;
 }
 #ssprodivI div span b{
 display:block;
-height:20px;
-width:20px;
+height:19px;
+width:19px;
 position:absolute;
-right:-6px;
-top:-2px;
+right:2px;
+top:2px;
 border-radius:50px;
-background:rgba(255,0,220,5);
+background:#fff;
 }
-#ssprodivI div input::placeholder{color:white;}
+#ssprodivI div input::placeholder{color:${ isD ? "white" : "#000"};}
 #ssprodivI div input,#ssprodivI div button{
 height:30px;
-background:rgba(255,255,255,.1);
+background:${isD ? "rgba(255,255,255,.1)" : "rgba(0,0,0,.1)"};
 width:100%;
 border:0;
 border-radius:20px;
@@ -608,7 +665,7 @@ ytpSetI.innerHTML+=`<b style='font-size:18px' >YT PRO Settings</b>
 <br>
 <div>Hide Shorts <span onclick="sttCnf(this,'shorts');" style="${sttCnf(0,0,"shorts")}" ><b style="${sttCnf(0,1,"shorts")}" ></b></span></div> 
 <br>
-<div style="display:flex;justify-content:center;font-family:cursive;text-align:center;font-size:2.25rem;font-weight:bolder;color:#0f8;">Made with 
+<div style="display:flex;justify-content:center;font-family:cursive;text-align:center;font-size:2.25rem;font-weight:bolder;color:${isD ? "#0f8" : "#094"};">Made with 
 &#x2665; by Prateek Chaubey</div>
 <br><br>
 <div style="font-size:1.25rem;"><b style="font-weight:bold">Disclaimer</b>: This is an unofficial OSS Youtube Mod , all the logos and brand names are property of Google LLC.<br>
@@ -644,35 +701,42 @@ fetch('https://cdn.jsdelivr.net/npm/ytpro/bgplay.js', {cache: 'reload'});
 function sttCnf(x,z,y){
 
 /*Way too complex to understand*/
+if(isD){
+var s=["#000","#717171","#fff"];
+}else{
+var s=["#fff","#909090","#151515"];
+}
+
+
 
 if(typeof y == "string"){
 
 if(localStorage.getItem(y) != "true"){
 if(z == 1){
-return 'background:rgba(255,255,255,.7);left:-6px;'
+return `background:${s[0]};left:2px;`;
 }else{
-return 'background:rgba(255,255,255,.1)';
+return `background:${s[1]};`;
 }
 }else{
 if(z == 1){
-return 'background:rgba(255,50,50,1);left:auto;right:-6px;'
+return `background:${s[0]};`;
 }else{
-return 'background:rgba(255,50,50,.5)';
+return `background:${s[2]};`;
 }
 }
 }
 if(localStorage.getItem(z) == "true"){
 localStorage.setItem(z,"false");
-x.style.background="rgba(255,255,255,.1)";
-x.children[0].style.left="-6px";
-x.children[0].style.background="rgba(255,255,255,.7)";
+x.style.background=s[1];
+x.children[0].style.left="2px";
+x.children[0].style.background=s[0];
 }
 else{
 localStorage.setItem(z,"true");
-x.style.background="rgba(255,50,50,.5)";
+x.style.background=s[2];
 x.children[0].style.left="auto";
-x.children[0].style.right="-6px";
-x.children[0].style.background="rgba(255,50,50,7)";
+x.children[0].style.right="2px";
+x.children[0].style.background=s[0];
 }
 
 if(localStorage.getItem("fzoom") == "false"){
@@ -712,9 +776,9 @@ history.back();
 });
 
 ytproDownDiv.setAttribute("style",`
-height:50%;width:85%;overflow:auto;background:#0f0f0f;
+height:50%;width:85%;overflow:auto;background:${isD ? "#0f0f0f" : "#fff"};
 position:absolute;bottom:20px;
-z-index:99999999999999;padding:20px;text-align:center;border-radius:25px;color:white;text-align:center;
+z-index:99999999999999;padding:20px;text-align:center;border-radius:25px;text-align:center;
 `);
 
 document.body.appendChild(ytproDown);
@@ -753,8 +817,8 @@ var thumb=vD?.videoDetails?.thumbnail?.thumbnails;
 var vids=sD?.streamingData?.formats;
 var avids=sD?.streamingData?.adaptiveFormats;
 var cap=cD?.captionTracks;
-var t=vD?.videoDetails?.title.replaceAll("|","").replaceAll("\\","").replaceAll("?","").replaceAll("*","").replaceAll("<","").replaceAll("/","").replaceAll(":","").replaceAll('"',"").replaceAll(">","");
-ytproDownDiv.innerHTML="<style>#downytprodiv a{text-decoration:none;color:white;} #downytprodiv li{list-style:none; display:flex;align-items:center;justify-content:center;color:#fff;border-radius:25px;padding:8px;background:rgb(10,0,0);margin:5px;box-shadow:0px 0px 2px rgb(236,84,232);margin-top:8px}</style>";
+var t=vD?.videoDetails?.title.replaceAll("|","").replaceAll("\\","").replaceAll("?","").replaceAll("*","").replaceAll("<","").replaceAll("/","").replaceAll(":","").replaceAll('"',"").replaceAll(">","").replaceAll("'","");
+ytproDownDiv.innerHTML=`<style>#downytprodiv a{text-decoration:none;} #downytprodiv li{list-style:none; display:flex;align-items:center;justify-content:center;border-radius:25px;padding:8px;background:${isD ? "rgb(10,0,0)" : d };margin:5px;box-shadow:0px 0px 2px rgb(236,84,232);margin-top:8px}</style>`;
 
 
 
@@ -769,7 +833,7 @@ url=ytproGetURL(vids[x].signatureCipher,"sig");
 url=ytproGetURL(vids[x].url,"n");
 }
 
-ytproDownDiv.innerHTML+=`<li data-ytprotit="${t}"  style="background:#001;box-shadow:0px 0px 2px rgb(70,84,232);"  onclick="YTDownVid(this,'.mp4')"  data-ytprourl="${url}">
+ytproDownDiv.innerHTML+=`<li data-ytprotit="${t}"  style="box-shadow:0px 0px 2px rgb(70,84,232);"  onclick="YTDownVid(this,'.mp4')"  data-ytprourl="${url}">
 ${downBtn}<span style="margin-left:10px;"  >${vids[x].qualityLabel} ${formatFileSize(((vids[x].bitrate*(vids[x].approxDurationMs/1000))/8))} </span></li>` ;
 }
 
@@ -805,9 +869,9 @@ ytproDownDiv.innerHTML+=`<li data-ytprotit="${t+Date.now()}"  onclick="YTDownVid
 }
 
 if(cap && cap.length){
-ytproDownDiv.innerHTML+="<br>Captions<br><br><style>cp{display:flex;align-items:center;width:100%;height:30px}c{height:45px;width:50px;padding-top:5px;background:rgba(255,255,255,.1);border-radius:10px;margin-left:10px;display:block}</style>";
+ytproDownDiv.innerHTML+=`<br>Captions<br><br><style>cp{display:flex;align-items:center;width:100%;height:30px}c{height:45px;width:50px;padding-top:5px;background:${d};border-radius:10px;margin-left:10px;display:block}</style>`;
 for(var x in cap){
-ytproDownDiv.innerHTML+=`<cp><span style="width:100px;text-align:left">${cap[x]?.name?.runs[0]?.text}</span> <div style="position:absolute;right:10px;display:flex"><c onclick="downCap('${cap[x].baseUrl}&fmt=xml','${t}.xml')" >${downBtn} <br>.xml</c><c onclick="downCap('${cap[x].baseUrl}&fmt=vtt','${t}.vtt')">${downBtn} <br>.vtt</c><c onclick="downCap('${cap[x].baseUrl}&fmt=srv1','${t}.srv1')">${downBtn} <br>.srv1</c><c onclick="downCap('${cap[x].baseUrl}&fmt=ttml','${t}.ttml')">${downBtn} <br>.ttml</c></div></cp><br><br>`; 
+ytproDownDiv.innerHTML+=`<cp><span style="width:100px;text-align:left">${cap[x]?.name?.runs[0]?.text}</span> <div style="position:absolute;right:10px;display:flex"><c onclick="downCap('${cap[x].baseUrl}','${t}.xml')" >${downBtn} <br>.xml</c><c onclick="downCap('${cap[x].baseUrl}&fmt=vtt','${t}.vtt')">${downBtn} <br>.vtt</c><c onclick="downCap('${cap[x].baseUrl}&fmt=srv1','${t}.srv1')">${downBtn} <br>.srv1</c><c onclick="downCap('${cap[x].baseUrl}&fmt=ttml','${t}.ttml')">${downBtn} <br>.ttml</c></div></cp><br><br>`; 
 }
 }
 
@@ -995,11 +1059,11 @@ return updateModel();
 window.location.hash="bgplay";
 });
 
-if(ytproNCode.length < 1 && ytproDecipher.length < 1 ){
+if(ytproNCode?.length < 1 && ytproDecipher?.length < 1 ){
 ytproAudElem.style.opacity=".5";
 ytproAudElem.style.pointerEvents="none";
 }
-else if(ytproNCode.length > 1 && ytproDecipher.length > 1 ){
+else if(ytproNCode?.length > 1 && ytproDecipher?.length > 1 ){
 ytproAudElem.style.opacity="1";
 ytproAudElem.style.pointerEvents="auto";
 }
@@ -1068,7 +1132,7 @@ ytProHeart(ysHeart);
 
 
 
-insertAfter(document.getElementsByClassName("carousel-wrapper")[0],ys);
+insertAfter(document.getElementsByClassName("reel-player-overlay-actions")[0],ys);
 ys.appendChild(ysDown);
 ys.appendChild(ysHeart);
 }
@@ -1110,15 +1174,15 @@ z-index:99999999999999;
 `);
 
 ytproHh.setAttribute("style",`
-height:50%;width:85%;overflow:auto;background:#0f0f0f;
+height:50%;width:85%;overflow:auto;background:${isD ? "#212121" : "#f1f1f1"};
 position:absolute;bottom:20px;
-z-index:99999999999999;padding:20px;text-align:center;border-radius:25px;color:white;text-align:center;
+z-index:99999999999999;padding:20px;text-align:center;border-radius:25px;text-align:center;
 `);
-ytproHh.innerHTML="<style>#heartytprodiv a{text-decoration:none;color:white;} #heartytprodiv li{list-style:none; display:flex;align-items:center;color:#fff;border-radius:5px;padding:0px;background:#000;margin:5px;}</style>";
+ytproHh.innerHTML=`<style>#heartytprodiv a{text-decoration:none;} #heartytprodiv li{list-style:none; display:flex;align-items:center;border-radius:15px;padding:0px;background:${isD ? "rgba(0,0,0,.5)" : "#fff"};margin:5px;}</style>`;
 ytproHh.innerHTML+="Hearted Videos<ul id='listurl'>";
 
 
-ytproHh.innerHTML+="<style>.thum{height:70px;border-radius:5px;}.thum img{float:left;height:70px;width:125px;border-radius:5px;flex-shrink: 0;}</style>";
+ytproHh.innerHTML+="<style>.thum{height:70px;border-radius:5px;}.thum img{float:left;height:70px;width:125px;border-radius:15px 0 0 15px;flex-shrink: 0;}</style>";
 
 document.body.appendChild(ytproH);
 ytproH.appendChild(ytproHh);
