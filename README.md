@@ -1,6 +1,6 @@
 
 <p align="center">
-<img src='.github/img/ytp.gif'  >
+<img src='.github/img/ytpro.gif' height=150  >
 </p>
 <h1 align=center>YT PREMIUM LITE </h1>
 
@@ -47,7 +47,9 @@
 
 ## ToDo
  * Add basic features to the video player
- * Improve mini player
+ * Video Summariser
+ * Enhance Audio
+ * Merging Adaptive Formats
 
 ### Credits
 * [node-ytdl](https://github.com/fent/node-ytdl) , [Sponsor Block](https://github.com/ajayyy/SponsorBlock) , [return-youtube-dislike](https://github.com/Anarios/return-youtube-dislike) , [ytdl](https://github.com/prateek-chaubey/ytdl)

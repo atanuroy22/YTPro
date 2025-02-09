@@ -12,6 +12,7 @@ import android.net.*;
 import android.util.*;
 import android.webkit.*;
 import java.io.*;
+import org.json.*;
 import android.content.pm.*;
 import java.net.URLEncoder;
 
@@ -77,11 +78,14 @@ public class MainActivity extends Activity {
             public void onPageFinished(WebView p1, String url) {
 
 
-                web.loadUrl("javascript:if (window.trustedTypes && window.trustedTypes.createPolicy) {window.trustedTypes.createPolicy('default', {createHTML: (string) => string,createScriptURL: string => string, createScript: string => string, });}");
+                web.loadUrl("javascript:if (window.trustedTypes && window.trustedTypes.createPolicy && !window.trustedTypes.defaultPolicy) {window.trustedTypes.createPolicy('default', {createHTML: (string) => string,createScriptURL: string => string, createScript: string => string, });}");
                 web.loadUrl("javascript:(function () { var script = document.createElement('script'); script.src='https://cdn.jsdelivr.net/npm/ytpro'; document.body.appendChild(script);  })();");
                 web.loadUrl("javascript:(function () { var script = document.createElement('script'); script.src='https://cdn.jsdelivr.net/npm/ytpro/bgplay.js'; document.body.appendChild(script);  })();");
                 if(dl){
-                    web.loadUrl("javascript:(function () {window.location.hash='download';})();");
+
+                    //Will Patch this later
+                    
+                    //web.loadUrl("javascript:(function () {window.location.hash='download';})();");
                     //dL=false;                
                 }
                 if(!url.contains("#bgplay") && isPlaying){
@@ -276,11 +280,10 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public void bgStart(String iconn , String titlen , String subtitlen,long dura) {
-//  ForegroundService.setupNotification(
-            icon  =iconn;
-            title =titlen;
+            icon=iconn;
+            title=titlen;
             subtitle=subtitlen;
-            duration= dura;
+            duration=dura;
             isPlaying=true;
 
             Intent intent = new Intent(getApplicationContext(), ForegroundService.class);
@@ -300,8 +303,8 @@ public class MainActivity extends Activity {
         public void bgUpdate(String iconn , String titlen , String subtitlen,long dura) {
 
 
-            icon =iconn;
-            title =titlen;
+            icon=iconn;
+            title=titlen;
             subtitle=subtitlen;
             duration=(long)(dura);
 
@@ -318,8 +321,6 @@ public class MainActivity extends Activity {
         }
         @JavascriptInterface
         public void bgStop() {
-            Log.e("hii","stop");
-
             isPlaying=false;
 
             stopService(new Intent(getApplicationContext(), ForegroundService.class));
@@ -329,10 +330,7 @@ public class MainActivity extends Activity {
         }
         @JavascriptInterface
         public void bgPause(long ct) {
-            Log.e("hii","pause");
 
-
-//ForegroundService.updateNotification(icon,title,subtitle,"play", getApplicationContext(),duration,ct);
 
             getApplicationContext().sendBroadcast(new Intent("UPDATE_NOTIFICATION")
                     .putExtra("icon", icon)
@@ -346,9 +344,6 @@ public class MainActivity extends Activity {
         }
         @JavascriptInterface
         public void bgPlay(long ct) {
-            Log.e("hii","play");
-//ForegroundService.updateNotification(icon,title,subtitle,"pause",getApplicationContext(),duration,ct);
-
 
             getApplicationContext().sendBroadcast(new Intent("UPDATE_NOTIFICATION")
                     .putExtra("icon", icon)
@@ -362,9 +357,6 @@ public class MainActivity extends Activity {
         }
         @JavascriptInterface
         public void bgBuffer(long ct) {
-            Log.e("hii","play");
-//ForegroundService.updateNotification(icon,title,subtitle,"buffer",getApplicationContext(),duration,ct);
-
 
             getApplicationContext().sendBroadcast(new Intent("UPDATE_NOTIFICATION")
                     .putExtra("icon", icon)
@@ -376,6 +368,16 @@ public class MainActivity extends Activity {
             );
 
 
+        }
+        @JavascriptInterface
+        public void fetchYouTubeData(String videoId,final boolean bgplay) {
+            new Thread(() -> {
+                JSONObject response = YoutubeRequest.getData(videoId,false);
+                if (response != null) {
+                    String jsonResponse = response.toString();
+                    runOnUiThread(() -> web.evaluateJavascript("callbackVideoResponse(" + jsonResponse + ","+bgplay+")", null));
+                }
+            }).start();
         }
         @JavascriptInterface
         public void pipvid(String x) {
@@ -433,9 +435,12 @@ public class MainActivity extends Activity {
             }
         };
 
-
+        if (Build.VERSION.SDK_INT >= 34 && getApplicationInfo().targetSdkVersion >= 34) {
+        registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"),RECEIVER_EXPORTED);
+        }
+        else{
         registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
-
+        }
     }
 
     @Override
