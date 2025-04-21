@@ -1,6 +1,6 @@
 
 <p align="center">
-<img src='.github/img/ytpro.gif' height=150  >
+<img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/ytpro.gif' height=150  >
 </p>
 <h1 align=center>YT PREMIUM LITE </h1>
 
@@ -10,22 +10,25 @@
 [![Gradle](https://github.com/prateek-chaubey/YTPro/actions/workflows/gradle.yml/badge.svg)](https://github.com/prateek-chaubey/YTPro/actions/workflows/gradle.yml)
 <a href="https://www.jsdelivr.com/package/npm/ytpro?tab=stats" ><img alt="jsDelivr monthly hits badge" src="https://data.jsdelivr.com/v1/package/npm/ytpro/badge"></a>
 
-[![https://telegram.me/th30neand0nly0ne](https://img.shields.io/badge/Telegram-Channel-orange.svg?style=flat-square)](https://telegram.me/th30neand0nly0ne)
-[![https://telegram.me/th30neand0nly](https://img.shields.io/badge/Telegram-@th30neand0nly-blue.svg?style=flat-square)](https://telegram.me/th30neand0nly)
-
 </div>
 
+---
+> [!TIP]
+> If you like this project, consider [sponsoring](https://github.com/sponsors/prateek-chaubey) to support the author 🌸
 ---
 
 #### Screenshots
 | | | |
 |:--:|:--:|:--:| 
-|<img src='.github/img/01103.png'  > | <img src='.github/img/01102.png'  > |<img src='.github/img/01101.png'  > |
+|<img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/com.google.android.youtube.pro.jpg'  > | <img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/01102.png'  > |<img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/01101.png'  > |
 
 ## Download YT PRO
 [![Download zip]([https://custom-icon-badges.herokuapp.com/badge/-Download-ff0000?style=for-the-badge&logo=download&logoColor=white "Download Apk](https://github.com/atanuroy22/YTPro/releases/download/Youtube_pro_lite/youtube_pro_lite.apk)")]([[https://github.com/atanuroy22/YTPro/releases/download/Youtube_premium_Lite-v3.5/YT.Premium.Lite.V3.5.api.apk](https://github.com/atanuroy22/YTPro/releases/download/Youtube_pro_lite/youtube_pro_lite.apk)]([https://github.com/atanuroy22/YTPro/releases/download/Youtube_premium_Lite-v3.5/YT.Premium.Lite.V3.5.api.apk](https://github.com/atanuroy22/YTPro/releases/download/Youtube_pro_lite/youtube_pro_lite.apk)))
 
 ## Features
+ * <img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/gemini-logo-13486188-10900314-unscreen-ezgif.com-crop.gif' height=15 width=15 > Google Gemini
+   * Summarise Vidoes
+   * Customisable prompts and models
  * Video Downloader
  * Shorts Downloader 
  * Thumbnails Downloader
@@ -45,14 +48,20 @@
  * Auto Updation of App
 
 
+## Gemini Prompt
+The available variables for gemini prompt are
+* `{url}` : The URL of the video
+* `{title}` : Title of the video
+* `{videoId}` : Video Id of the video
+
 ## ToDo
  * Add basic features to the video player
- * Video Summariser
  * Enhance Audio
  * Merging Adaptive Formats
 
 ### Credits
-* [node-ytdl](https://github.com/fent/node-ytdl) , [Sponsor Block](https://github.com/ajayyy/SponsorBlock) , [return-youtube-dislike](https://github.com/Anarios/return-youtube-dislike) , [ytdl](https://github.com/prateek-chaubey/ytdl)
+ * [Sponsor Block](https://github.com/ajayyy/SponsorBlock)
+ * [return-youtube-dislike](https://github.com/Anarios/return-youtube-dislike)
 
 ### ❤️Supporters❤️
 [![Stargazers repo roster for @prateek-chaubey/YTPro](http://reporoster.com/stars/dark/prateek-chaubey/YTPro)](https://github.com/prateek-chaubey/YTPro/stargazers)

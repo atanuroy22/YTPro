@@ -15,6 +15,7 @@ import java.io.*;
 import org.json.*;
 import android.content.pm.*;
 import java.net.URLEncoder;
+import android.webkit.CookieManager;
 
 public class MainActivity extends Activity {
 
@@ -37,6 +38,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
 
         load(false);
+
+        MainActivity.this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
     public void load(boolean dl) {
         dL=dl;
@@ -164,6 +167,14 @@ public class MainActivity extends Activity {
                     android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT :
                     android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE;
 
+             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        
+             WindowManager.LayoutParams params = MainActivity.this.getWindow().getAttributes();
+             params.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+             MainActivity.this.getWindow().setAttributes(params); 
+             }
+
             if (this.mCustomView != null) {
                 onHideCustomView();
                 return;
@@ -174,6 +185,18 @@ public class MainActivity extends Activity {
             this.mOriginalOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;this.mCustomViewCallback = viewCallback; ((FrameLayout)MainActivity.this.getWindow().getDecorView()).addView(this.mCustomView, new FrameLayout.LayoutParams(-1, -1)); MainActivity.this.getWindow().getDecorView().setSystemUiVisibility(3846);
         }
         public void onHideCustomView() {
+
+
+              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+    
+              getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+              WindowManager.LayoutParams params = getWindow().getAttributes();
+              params.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT;
+              MainActivity.this.getWindow().setAttributes(params);
+                  
+              }
+            
 
             ((FrameLayout)MainActivity.this.getWindow().getDecorView()).removeView(this.mCustomView);
             this.mCustomView = null;
@@ -201,7 +224,7 @@ public class MainActivity extends Activity {
 
     private void downloadFile(String filename, String url, String mtype) {
         
-        if (Build.VERSION.SDK_INT > 22 && Build.VERSION.SDK_INT < 28 && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+        if (Build.VERSION.SDK_INT > 22 && Build.VERSION.SDK_INT < Build.VERSION_CODES.R && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
             runOnUiThread(() -> Toast.makeText(getApplicationContext(), R.string.grant_storage, Toast.LENGTH_SHORT).show());
             requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
@@ -378,6 +401,32 @@ public class MainActivity extends Activity {
                     runOnUiThread(() -> web.evaluateJavascript("callbackVideoResponse(" + jsonResponse + ","+bgplay+")", null));
                 }
             }).start();
+        }
+        @JavascriptInterface
+         public void getSNlM0e(String cookies) {
+            
+            new Thread(() -> {
+            String response = GeminiWrapper.getSNlM0e(cookies);
+            runOnUiThread(() -> web.evaluateJavascript("callbackSNlM0e.resolve(`" + response +"`)", null));    
+            }).start();
+
+
+        }
+        @JavascriptInterface
+         public void GeminiClient(String url,String headers,String body) {
+        
+                
+            new Thread(() -> {
+            JSONObject response = GeminiWrapper.getStream(url,headers,body);
+            runOnUiThread(() -> web.evaluateJavascript("callbackGeminiClient.resolve(" + response +")", null));   
+            }).start();
+
+
+        }
+        @JavascriptInterface
+        public String getAllCookies(String url) {	
+        String cookies = CookieManager.getInstance().getCookie(url);
+        return cookies;
         }
         @JavascriptInterface
         public void pipvid(String x) {
