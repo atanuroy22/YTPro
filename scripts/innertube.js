@@ -315,7 +315,7 @@ ytproDownDiv.innerHTML=`<style>#downytprodiv a{text-decoration:none;} #downytpro
 
 
 
-ytproDownDiv.innerHTML+="Select Avilaible Formats<ul id='listurl'>";
+ytproDownDiv.innerHTML+="Select Available Formats<ul id='listurl'>";
 
 for(var x in vids){
 
