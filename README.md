@@ -21,7 +21,7 @@
 
 ## Download YT PRO
 
-[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-ff0000?style=for-the-badge&logo=download&logoColor=white "Download Apk")](https://nightly.link/prateek-chaubey/YTPro/workflows/gradle/main/YTPRO.zip)
+[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-ff0000?style=for-the-badge&logo=download&logoColor=white "Download Apk")](https://nightly.link/atanuroy22/YTPro/workflows/gradle/main/YTPRO.zip)
 
 #### Screenshots
 | | | |
