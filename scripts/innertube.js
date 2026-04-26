@@ -1,6 +1,6 @@
 /*****YTPRO*******
 Author: Atanu Roy
-Version: 3.9.5
+Version: 3.9.6
 URI: https://github.com/atanuroy22/YTPRO
 */
 
