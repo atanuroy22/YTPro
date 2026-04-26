@@ -1,7 +1,7 @@
 /*****YTPRO*******
-Author: Prateek Chaubey
+Author: Atanu Roy
 Version: 3.9.5
-URI: https://github.com/prateek-chaubey/YTPRO
+URI: https://github.com/atanuroy22/YTPRO
 */
 
 import {BG} from 'https://youtube.com/ytpro_cdn/esm/bgutils-js@3.2.0/es2022/bgutils-js.bundle.mjs';

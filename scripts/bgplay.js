@@ -1,7 +1,7 @@
 /*****YTPRO*******
-Author: Prateek Chaubey
+Author: Atanu Roy
 Version: 3.9.2
-URI: https://github.com/prateek-chaubey/YTPRO
+URI: https://github.com/atanuroy22/YTPRO
 */
 
 if (typeof MediaMetadata === 'undefined') {

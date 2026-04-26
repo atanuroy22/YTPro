@@ -1,22 +1,22 @@
  
 <p align="center">
-<img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/ytpro.gif' height=150  >
+<img src='https://raw.githubusercontent.com/atanuroy22/YTPro/main/.github/img/ytpro.gif' height=150  >
 </p>
 <h1 align=center>YT PRO </h1>
 
 <div align="center">
 
 
-[![Gradle](https://github.com/prateek-chaubey/YTPro/actions/workflows/gradle.yml/badge.svg)](https://github.com/prateek-chaubey/YTPro/actions/workflows/gradle.yml)
+[![Gradle](https://github.com/atanuroy22/YTPro/actions/workflows/gradle.yml/badge.svg)](https://github.com/atanuroy22/YTPro/actions/workflows/gradle.yml)
 <a href="https://www.jsdelivr.com/package/npm/ytpro?tab=stats" ><img alt="jsDelivr monthly hits badge" src="https://data.jsdelivr.com/v1/package/npm/ytpro/badge"></a>
-<img src=https://img.shields.io/github/downloads/prateek-chaubey/YTPro/total >
+<img src=https://img.shields.io/github/downloads/atanuroy22/YTPro/total >
 
 </div>
 
 ### Become a Sponsor 
 ---
 > [!TIP]
-> If you like this project, consider [sponsoring](https://github.com/sponsors/prateek-chaubey) to support the author 🌸
+> If you like this project, consider [sponsoring](https://github.com/sponsors/atanuroy22) to support Atanu Roy 🌸
 ---
 
 ## Download YT PRO
@@ -26,12 +26,12 @@
 #### Screenshots
 | | | |
 |:--:|:--:|:--:| 
-|<img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/screen3.jpg'  > | <img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/screen2.jpg'  > |<img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/screen5.jpg'  > | 
-|<img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/screen6.jpg'  > | <img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/screen4.jpg'  > |<img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/screen1.jpg'  > |
+|<img src='https://raw.githubusercontent.com/atanuroy22/YTPro/main/.github/img/screen3.jpg'  > | <img src='https://raw.githubusercontent.com/atanuroy22/YTPro/main/.github/img/screen2.jpg'  > |<img src='https://raw.githubusercontent.com/atanuroy22/YTPro/main/.github/img/screen5.jpg'  > | 
+|<img src='https://raw.githubusercontent.com/atanuroy22/YTPro/main/.github/img/screen6.jpg'  > | <img src='https://raw.githubusercontent.com/atanuroy22/YTPro/main/.github/img/screen4.jpg'  > |<img src='https://raw.githubusercontent.com/atanuroy22/YTPro/main/.github/img/screen1.jpg'  > |
 
 
 ## Features
- * <img src='https://raw.githubusercontent.com/prateek-chaubey/YTPro/main/.github/img/gemini-logo-13486188-10900314-unscreen-ezgif.com-crop.gif' height=15 width=15 > Google Gemini
+ * <img src='https://raw.githubusercontent.com/atanuroy22/YTPro/main/.github/img/gemini-logo-13486188-10900314-unscreen-ezgif.com-crop.gif' height=15 width=15 > Google Gemini
    * Summarise Vidoes
    * Customisable prompts and models
  * Video Downloader
@@ -73,9 +73,9 @@ The available variables for gemini prompt are
  * [YouTube.js](https://github.com/LuanRT/YouTube.js/)
 
 ### ❤️Supporters❤️
-[![Stargazers repo roster for @prateek-chaubey/YTPro](http://reporoster.com/stars/dark/prateek-chaubey/YTPro)](https://github.com/prateek-chaubey/YTPro/stargazers)
+[![Stargazers repo roster for @atanuroy22/YTPro](http://reporoster.com/stars/dark/atanuroy22/YTPro)](https://github.com/atanuroy22/YTPro/stargazers)
      
-[![Forkers repo roster for @prateek-chaubey/YTPro](http://reporoster.com/forks/dark/prateek-chaubey/YTPro)](https://github.com/prateek-chaubey/YTPro/network/members)
+[![Forkers repo roster for @atanuroy22/YTPro](http://reporoster.com/forks/dark/atanuroy22/YTPro)](https://github.com/atanuroy22/YTPro/network/members)
 
 
 ## Disclaimer 

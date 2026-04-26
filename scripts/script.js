@@ -1,7 +1,7 @@
 /*****YTPRO*******
-Author: Prateek Chaubey
+Author: Atanu Roy
 Version: 3.9.5
-URI: https://github.com/prateek-chaubey/YTPRO
+URI: https://github.com/atanuroy22/YTPRO
 Last Updated On: 4 Mar , 2026 , 12:36 IST
 */
 
@@ -740,13 +740,13 @@ ytpSetI.innerHTML+=`<br><b style='font-size:18px' >YT PRO Settings</b>
 </svg>
 </button>
 <br>
-<button onclick="Android.oplink('https://github.com/prateek-chaubey/YTPRO/issues')">Report Bugs
+<button onclick="Android.oplink('https://github.com/atanuroy22/YTPRO/issues')">Report Bugs
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="${isD ? "#ccc" : "#444"}" viewBox="0 0 16 16">
 <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
 </svg>
 </button>
 <br>
-<button style="font-weight:bolder;" onclick="Android.oplink('https://github.com/sponsors/prateek-chaubey');">Become a Sponsor
+<button style="font-weight:bolder;" onclick="Android.oplink('https://github.com/sponsors/atanuroy22');">Become a Sponsor
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="${isD ? "#ccc" : "#444"}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M5 2l6 6-6 6"/>
 </svg>
@@ -756,7 +756,7 @@ ytpSetI.innerHTML+=`<br><b style='font-size:18px' >YT PRO Settings</b>
 <div>Developer Mode <span onclick="sttCnf(this,'devMode');" style="${sttCnf(0,0,"devMode")}" ><b style="${sttCnf(0,1,"devMode")}"></b></span></div>
 <br><br>
 <p style="font-size:1.25rem;width:calc(100% - 20px);margin:auto;text-align:left"><b style="font-weight:bold">Disclaimer</b>: This is an unofficial OSS Youtube Mod, all the logos and brand names are property of Google LLC.<br>
-You can find the source code at <a href="#" style="font-family:monospace;" onclick="Android.oplink('https://github.com/prateek-chaubey/YTPRO')" > https://github.com/prateek-chaubey/YTPRO</a>
+You can find the source code at <a href="#" style="font-family:monospace;" onclick="Android.oplink('https://github.com/atanuroy22/YTPRO')" > https://github.com/atanuroy22/YTPRO</a>
 <br><br></p><br><br><br>
 
 <div class="geminiModels">
@@ -790,7 +790,7 @@ stroke="black" ${ !isD ? "stroke-width='1'" : "" } stroke-linejoin="round" strok
 
 
 
-<z style="margin-left:6px">by Prateek Chaubey</z>
+<z style="margin-left:6px">by Atanu Roy</z>
 </div>
 `;
 
@@ -2532,12 +2532,12 @@ Latest Version ${YTProVer} of YTPRO is available , update the YTPRO to get lates
 - Optimized the UI of both Download and Settings menu<br>
 - Added new UI icons based on the latest YouTube's UI<br>
 - Fixed bugs and improved functionality<br>
-- for the full list <u onclick="Android.oplink('https://github.com/prateek-chaubey/YTPRO/releases');" >click here</u>
+- for the full list <u onclick="Android.oplink('https://github.com/atanuroy22/YTPRO/releases');" >click here</u>
 <br>
 <br>
 <div style="display:flex;">
 <!--<button style="border:0;border-radius:10px;height:30px;width:150px;background:;" onclick="this.parentElement.parentElement.parentElement.remove();">Cancel</button>-->
-<button style="border:0;border-radius:10px;height:30px;width:150px;background:rgba(255,50,50,.7);float:right;" onclick="Android.downvid('YTPRO.zip','https://nightly.link/prateek-chaubey/YTPro/workflows/gradle/main/YTPRO.zip','application/zip');">Download</button>
+<button style="border:0;border-radius:10px;height:30px;width:150px;background:rgba(255,50,50,.7);float:right;" onclick="Android.downvid('YTPRO.zip','https://nightly.link/atanuroy22/YTPro/workflows/gradle/main/YTPRO.zip','application/zip');">Download</button>
 </div>
 
 </div>
